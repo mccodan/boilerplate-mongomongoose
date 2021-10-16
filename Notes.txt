@@ -1,0 +1,25 @@
+We will be running the MongoDB on MongoDB Atlas.
+We get the URI of the cluster in Atlas, and put that as environment variable in .env. Then we initialize
+the connection to the database at the beginning of our app.
+
+
+It is with this mongodb database that we will be able to perform CRUD operations.
+
+We start with Schemas. Each schema maps to a MongoDB collection. It defines the shape of the 
+   documents within that collection. Schemas are building block for Models. A model allows you 
+   to create instances of your objects, called documents.
+
+
+The done() function is a callback that tells us that we can proceed after completing an 
+   asynchronous operation such as inserting, searching, updating, or deleting. It's following 
+   the Node convention, and should be called as done(null, data) on success, or done(err) on 
+   error.
+
+/* Example */
+const someFunc = function(done) {
+  //... do something (risky) ...
+  if (error) return done(error);
+  done(null, result);
+};
+
+

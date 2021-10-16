@@ -1,5 +1,9 @@
 require('dotenv').config();
+require('mongodb');
+const mongoose = require('mongoose');
 
+//this is us "turning on" the database connection at the beginning of our app
+mongoose.connect(process.env.MONGO_URI);
 
 let Person;
 
