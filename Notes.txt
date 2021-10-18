@@ -8,6 +8,34 @@ It is with this mongodb database that we will be able to perform CRUD operations
 We start with Schemas. Each schema maps to a MongoDB collection. It defines the shape of the 
    documents within that collection. Schemas are building block for Models. A model allows you 
    to create instances of your objects, called documents.
+/* Example */
+const { Schema } = mongoose;
+const blogSchema = new Schema({
+    title:  String, // String is shorthand for {type: String}
+    author: String,
+    body:   String,
+    comments: [{ body: String, date: Date }],
+    date: { type: Date, default: Date.now },
+    hidden: Boolean,
+    meta: {
+      votes: Number,
+      favs:  Number
+    }
+  });
+
+<schema>.add() lets us add keys to an existing schema. Done like  someSchema.add({ year: Number});
+
+The permitted SchemaTypes are:
+   String
+   Number
+   Date
+   Buffer
+   Boolean
+   Mixed
+   ObjectId
+   Array
+   Decimal128
+   Map
 
 
 The done() function is a callback that tells us that we can proceed after completing an 
@@ -22,4 +50,16 @@ const someFunc = function(done) {
   done(null, result);
 };
 
+Schemas not only define the structure of your document and casting of properties, they also 
+  define document instance methods, static Model methods, compound indexes, and document 
+  lifecycle hooks called middleware.
+
+To use our schema definition, we need to convert our blogSchema into a Model we can work with.
+  To do so, we pass it into mongoose.model(modelName, schema)
+EX:   const Blog = mongoose.model('Blog', blogSchema);
+
+
+In its simplest usage, Model.find() accepts a query document (a JSON object) as the 
+   first argument, then a callback. It returns an array of matches. It supports an 
+   extremely wide range of search options.
 
